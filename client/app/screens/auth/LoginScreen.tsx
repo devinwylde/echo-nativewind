@@ -71,11 +71,12 @@ const LoginScreen = ({ route, navigation }: any) => {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View>
-        <View style={styles.main_container}>
+      <View className="w-full h-full">
+        <View className="w-full h-full justify-start items-center px-6 py-2 bg-white">
+          <View className="flex flex-row w-full mt-4">
           <TouchableOpacity
             onPress={() => navigation.goBack()}
-            style={styles.back_button}>
+            >
             <ArrowLeftCircle
               color="black"
               strokeWidth={1.4}
@@ -83,11 +84,13 @@ const LoginScreen = ({ route, navigation }: any) => {
               height={34}
             />
           </TouchableOpacity>
-          <View style={styles.header_container}>
-            <Text style={styles.header_text}>Welcome back!</Text>
-            <Text style={styles.subheader_text}>How have you been?</Text>
           </View>
-          <View style={styles.input_container}>
+
+          <View className="w-full mt-8">
+            <Text className="text-5xl font-bold">Welcome back!</Text>
+            <Text className="text-xl mt-1">How have you been?</Text>
+          </View>
+          <View className="w-full mt-8">
             <EmailInput
               value={email}
               onChangeText={(text) => setEmail(text)}
@@ -99,29 +102,29 @@ const LoginScreen = ({ route, navigation }: any) => {
               invalid={invalidLogin}
             />
           </View>
-          <View style={styles.button_container}>
+          
+          <View className="flex justify-around items-center w-full mt-2">
+            <AuthenticationErrorMessage
+              response={authResponse}
+              onPress={() => setAuthResponse(undefined)}
+            />
+          </View>
+
+          <View className="mt-4">
             <LogInButton onPress={onHandleSubmit} />
           </View>
-          <TouchableOpacity>
-            <Text
-              style={[
-                styles.regular_text,
-                { textDecorationLine: "underline" },
-              ]}>
-              Forgot password?
-            </Text>
-          </TouchableOpacity>
-          <View style={styles.divider_container}>
-            <View style={styles.horizontal_line} />
+
+          <View className="flex flex-row items-center mt-8">
+            <View className="flex flex-1 h-0.5 bg-gray-500" />
             <View>
-              <Text style={[styles.regular_text, { marginHorizontal: 10 }]}>
+              <Text className="mx-3 font-light">
                 Or Login With
               </Text>
             </View>
-            <View style={styles.horizontal_line} />
+            <View className="flex flex-1 h-0.5 bg-gray-500" />
           </View>
 
-          <View style={styles.externalLinkContainer}>
+          <View className="flex flex-row w-full justify-between mt-4">
             <ExternalAuthButton
               onPress={handleGoogleSignIn}
               companyName="google"
@@ -139,28 +142,14 @@ const LoginScreen = ({ route, navigation }: any) => {
               companyName="github"
             />
           </View>
-          <View style={styles.footer_text_container}>
-            <Text style={styles.footer_text}>Don't have an account?</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("Sign Up")}>
-              <Text
-                style={[
-                  styles.footer_text,
-                  { color: "#5dbea3", textDecorationLine: "underline" },
-                ]}>
-                Sign up
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-
-        <View style={styles.error_container}>
-          <AuthenticationErrorMessage
-            response={authResponse}
-            onPress={() => {
-              setAuthResponse(undefined);
-              invalidateLogin(false);
-            }}
-          />
+          <TouchableOpacity 
+                  className="w-full justify-center items-center flex-row mt-10"
+                  onPress={() => {
+                    navigation.navigate("Sign Up");
+                }}>
+                  <Text className="font-semibold">Don't have an account?</Text>
+                  <Text className="font-semibold underline text-teal-300 ml-1">Sign up.</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -171,102 +160,102 @@ const LoginScreen = ({ route, navigation }: any) => {
   );
 };
 
-const styles = StyleSheet.create({
-  main_container: {
-    display: "flex",
-    height: "100%",
-    width: "100%",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    paddingHorizontal: Dimensions.get("window").width * 0.11,
-    paddingVertical: Dimensions.get("window").height * 0.01,
-    backgroundColor: "white",
-    gap: Dimensions.get("window").height * 0.029,
-  },
+// const styles = StyleSheet.create({
+//   main_container: {
+//     display: "flex",
+//     height: "100%",
+//     width: "100%",
+//     justifyContent: "flex-start",
+//     alignItems: "center",
+//     paddingHorizontal: Dimensions.get("window").width * 0.11,
+//     paddingVertical: Dimensions.get("window").height * 0.01,
+//     backgroundColor: "white",
+//     gap: Dimensions.get("window").height * 0.029,
+//   },
 
-  //This is an example of where the error message could be
-  error_container: {
-    display: "flex",
-    justifyContent: "space-around",
-    alignItems: "center",
-    width: "100%",
-    top: Dimensions.get("window").height * 0.1,
-    position: "absolute",
-  },
+//   //This is an example of where the error message could be
+//   error_container: {
+//     display: "flex",
+//     justifyContent: "space-around",
+//     alignItems: "center",
+//     width: "100%",
+//     top: Dimensions.get("window").height * 0.1,
+//     position: "absolute",
+//   },
 
-  input_container: {
-    display: "flex",
-    width: "100%",
-    justifyContent: "space-around",
-    alignItems: "center",
-    gap: Dimensions.get("window").height * 0.02,
-  },
+//   input_container: {
+//     display: "flex",
+//     width: "100%",
+//     justifyContent: "space-around",
+//     alignItems: "center",
+//     gap: Dimensions.get("window").height * 0.02,
+//   },
 
-  button_container: {
-    display: "flex",
-    justifyContent: "space-around",
-    alignItems: "center",
-    width: "100%",
-  },
+//   button_container: {
+//     display: "flex",
+//     justifyContent: "space-around",
+//     alignItems: "center",
+//     width: "100%",
+//   },
 
-  header_container: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "flex-start",
-    width: "100%",
-    marginBottom: Dimensions.get("window").height * 0.019,
-    marginTop: Dimensions.get("window").height * 0.23,
-  },
+//   header_container: {
+//     display: "flex",
+//     justifyContent: "center",
+//     alignItems: "flex-start",
+//     width: "100%",
+//     marginBottom: Dimensions.get("window").height * 0.019,
+//     marginTop: Dimensions.get("window").height * 0.23,
+//   },
 
-  header_text: {
-    fontFamily: "Quicksand-Bold",
-    fontSize: 37,
-    marginBottom: Dimensions.get("window").height * 0.01,
-  },
-  subheader_text: {
-    fontFamily: "Quicksand-Medium",
-    fontSize: 20,
-  },
-  regular_text: {
-    fontFamily: "Quicksand-Medium",
-    color: "#8E8E8E",
-  },
-  horizontal_line: {
-    flex: 1,
-    height: 1,
-    backgroundColor: "#8E8E8E",
-  },
-  externalLinkContainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    width: "100%",
-  },
-  footer_text: {
-    fontFamily: "Quicksand-Bold",
-    color: "black",
-    fontSize: 15,
-  },
-  footer_text_container: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "flex-end",
-    gap: 7,
-    flex: 1,
-    paddingBottom: Dimensions.get("window").height * 0.01,
-  },
-  divider_container: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginVertical: Dimensions.get("window").height * 0.011,
-  },
-  back_button: {
-    position: "absolute",
-    top: Dimensions.get("window").height * 0.075,
-    left: Dimensions.get("window").width * 0.075,
-  },
-});
+//   header_text: {
+//     fontFamily: "Quicksand-Bold",
+//     fontSize: 37,
+//     marginBottom: Dimensions.get("window").height * 0.01,
+//   },
+//   subheader_text: {
+//     fontFamily: "Quicksand-Medium",
+//     fontSize: 20,
+//   },
+//   regular_text: {
+//     fontFamily: "Quicksand-Medium",
+//     color: "#8E8E8E",
+//   },
+//   horizontal_line: {
+//     flex: 1,
+//     height: 1,
+//     backgroundColor: "#8E8E8E",
+//   },
+//   externalLinkContainer: {
+//     display: "flex",
+//     flexDirection: "row",
+//     justifyContent: "space-between",
+//     alignItems: "center",
+//     width: "100%",
+//   },
+//   footer_text: {
+//     fontFamily: "Quicksand-Bold",
+//     color: "black",
+//     fontSize: 15,
+//   },
+//   footer_text_container: {
+//     display: "flex",
+//     flexDirection: "row",
+//     justifyContent: "center",
+//     alignItems: "flex-end",
+//     gap: 7,
+//     flex: 1,
+//     paddingBottom: Dimensions.get("window").height * 0.01,
+//   },
+//   divider_container: {
+//     flexDirection: "row",
+//     alignItems: "center",
+//     marginVertical: Dimensions.get("window").height * 0.011,
+//   },
+//   back_button: {
+//     position: "absolute",
+//     top: Dimensions.get("window").height * 0.075,
+//     left: Dimensions.get("window").width * 0.075,
+//   },
+// });
 
 export default LoginScreen;
